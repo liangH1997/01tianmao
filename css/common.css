@@ -104,7 +104,7 @@ header .header-wrap{
     background: #fff; 
     box-shadow: 0 0 5px #aaa;
     display: none;
-    z-index: 1;
+    z-index: 105;
 }
 .header-wrap .phone-code img{
     width: 155px;
@@ -184,7 +184,7 @@ header .header-wrap{
     border-bottom: 1px solid #e5e5e5;
     display: none;
     padding: 25px 0px;
-    z-index: 101;
+    z-index: 110;
 }
 .header-wrap ul .pad-right:hover .web-nav{
     display: block;

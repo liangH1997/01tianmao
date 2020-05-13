@@ -29,7 +29,6 @@
     display: inline-block;
     height: 36px;
     width: 491px;
-    font: 16px/22px arial;
     box-sizing: border-box;
     background: 0 0;
     font-size: 14px;
@@ -54,6 +53,29 @@
     color: #fff;
     background-color: #FF0036;
 }
+.search-c #name-list{
+    width: 491px;
+    position: absolute;
+    left: 0;
+    top: 39px;
+    background-color: #fff;
+    z-index: 101;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 0 5px #aaa;
+    display: none;
+}
+#name-list li{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #666;
+    padding-left: 5px;
+    border-bottom: 1px solid #e5e5e5;
+}
+#name-list li:hover{
+    background-color: #ff0036;
+    color: #fff;
+}
 .search-r{
     position: absolute;
     right: 10px;
@@ -61,6 +83,69 @@
     top: 12px;
 }
 
+/* hd-search */
+#hd-search{
+    width: 100%;
+    height: 50px;
+    background-color: #ff0036;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: none;
+}
+#hd-search-box {
+    width: 1230px;
+    height: 50px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 50px;
+    background: url(../images/tmalllogo.png)no-repeat left center;
+    background-size: auto 36px;
+    position: relative;
+}
+#hd-search-box #hd-text{
+    width: 640px;
+    color: #000;
+    margin: 0;
+    height: 20px;
+    line-height: 20px;
+    padding: 5px 3px 5px 5px;
+    font-weight: 900;
+    background-color: #fff;
+}
+#hd-search-box #hd-btn{
+    width: 90px;
+    border: 0;
+    font-size: 16px;
+    letter-spacing: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #FF0036;
+    height: 30px;
+    overflow: hidden;
+}
+#name-list2{
+    width: 650px;
+    position: absolute;
+    left: 242px;
+    top: 44px;
+    background-color: #fff;
+    box-shadow: 0 0 5px #aaa;
+    display: none;
+}
+#name-list2 li{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #666;
+    padding-left: 5px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: left;
+}
+#name-list2 li:hover{
+    background-color: #ff0036;
+    color: #fff;
+}
 /* content */
 /* con-nav */
 #content{
@@ -101,7 +186,6 @@
     width: 1230px;
     left: 50%;
     transform: translateX(-50%);
-    height: 500px;
     position: absolute;
     z-index: 100;
 }
@@ -128,6 +212,9 @@
 /* category-tab */
 .category-tab{
     background-color: rgba(0,0,0,.55);
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 200px;
     height: 500px;
 }
@@ -251,14 +338,41 @@
 .category-tab li:nth-of-type(16):hover i{
     color: #3bc7b0;
 }
-/* banner-con */
-.banner-con{
+/* banner-box */
+#banner-box{
     width: 100%;
     height: 500px;
     background-color: #e5e5e5;
+    position: relative;
+    overflow: hidden;
 }
-.banner-con img{
-    margin: 0 auto;
+#banner-box div{
+    width: 100%;
+    height: 500px;
+    text-align: center;
+}
+#banner-box div img{
+    width: 1230px;
+    height: 500px;
+    display: inline-block;
+}
+#banner-box div:nth-child(1){
+    background-color: #e5e5e5;
+}
+#banner-box div:nth-child(2){
+    background-color:#7493EC;
+}
+#banner-box div:nth-child(3){
+    background-color:#e8e8e8;
+}
+#banner-box div:nth-child(4){
+    background-color:#58717F;
+}
+#banner-box div:nth-child(5){
+    background-color:#e8e8e8;
+}
+#banner-box ul li{
+    opacity: .5;
 }
 /* activity */
 #activity{
@@ -565,6 +679,12 @@
     width: 462px;
     height: 225px;
 }
+#slider-ul li:nth-child(2) div{
+    display: none;
+}
+#slider-ul li:nth-child(2) img{
+    left: -231px;
+}
 .maket-con-r .maket-first ul:hover img{
     opacity: 0.8;
 }
@@ -853,3 +973,41 @@
  .category-tab li:hover .cc{
     display: block;
  }
+#left-nav{
+    width: 0;
+    height: 0;
+    position: fixed;
+    left: 50%;
+    margin-left: -660px;
+    bottom: 50px;
+    z-index: 9999;
+    overflow: hidden;
+}
+#left-nav .nav-text{
+    width: 36px;
+    height: 36px;
+    background-color: #ff0036;
+    color: #fff;
+    text-align: center;
+    line-height: 36px;
+    font-size: 12px;
+}
+#left-nav a{
+    display: block;
+    width: 36px;
+    height: 30px;
+    line-height: 12px;
+    text-align: center;
+    padding-top: 6px;
+    color: #fff;
+    margin-top: 1px;
+    background-color: #666;
+    overflow: hidden;
+    font-size: 12px;
+}
+#left-nav a:hover{
+    background-color: #000;
+}
+#nav-con a:last-of-type{
+    background-color: rgba(0,0,0,.3);
+}
