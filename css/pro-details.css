@@ -6,13 +6,19 @@ header{
 .header-wrap p{
     line-height: 26px;
 }
-.header-wrap p a:first-child{
+.header-wrap #login-fail a:first-child{
     background: url(../images/51-home.png) no-repeat center left;
     background-size: 15px 12px;
     padding-left: 20px;
 }
 .header-wrap p em{
     padding-left: 22px;
+}
+#login-sucess a:hover{
+    text-decoration: underline;
+}
+#login-sucess .username{
+    padding: 0;
 }
 .header-wrap>ul>li{
     height: 26px;
@@ -119,6 +125,30 @@ header{
     border: none;
     color: #fff;
     background-color: #333;
+}
+/* 搜索索引 */
+ #name-list{
+    width: 373px;
+    position: absolute;
+    left: 0;
+    top: 36px;
+    background-color: #fff;
+    z-index: 101;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 0 5px #aaa;
+    display: none;
+}
+#name-list li{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #666;
+    padding-left: 5px;
+    border-bottom: 1px solid #e5e5e5;
+}
+#name-list li:hover{
+    background-color: #ff0036;
+    color: #fff;
 }
 .search-box .store-eva{
     width: 260px;
@@ -572,17 +602,29 @@ header{
 }
 .content-top-img .content-top-booth span{
     display: block;
-    top: 0px;
-    left: 0px;
     width: 218px;
     height: 218px;
     background-repeat: repeat;
     cursor: move;
-    z-index: 1;
+    z-index: 20;
     position: absolute;
     overflow: hidden;
     background-position: 0 0;
     background: url(../images/pro-check.png);
+    display: none;
+}
+#show-box{
+    position: absolute;
+    left: 440px;
+    top: 0;
+    width: 420px;
+    height: 420px;
+    border: 1px solid #bbb;
+    z-index: 20;
+    display: none;
+    background: url(../images/pro-img01.jpg)no-repeat;
+    background-size: 200% 200%;
+
 }
 .content-top-img .img-list{
     width: 460px;
@@ -778,6 +820,7 @@ header{
 }
 .goods-key .num-zj span a{
     color: #878787;
+    cursor: pointer;
 }
 .goods-key .goods-key-con .goods-liang{
     display: inline-block;
@@ -971,6 +1014,74 @@ header{
     text-decoration: underline;
 }
 /* content-con */
+/* addTop */
+#addTop{
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 49px;
+    z-index: 99;
+    box-shadow: rgba(0,0,0,.2) 0 1px 5px 0;
+    background-color: #fff;
+    display: none;
+}
+#addTop .addTop-con{
+    width: 1190px;
+    margin: 0 auto;
+}
+#addTop .store-box{
+    width: 199px;
+    border-left: 1px solid #e5e5e5;
+    height: 49px;
+    background-color: #fff;
+    position: relative;
+    float: left;
+}
+#addTop .store-box:hover h3 span{
+    transform: rotate(180deg);
+}
+#addTop .store-box:hover .store-info{
+    display: block;
+}
+#addTop .store-box h3{
+    position: relative;
+}
+#addTop .store-box h3 span{
+    border-width: 5px;
+    border-style: solid dashed dashed;
+    border-color: #bbb transparent transparent;
+    position: absolute;
+    top: 22px;
+    right: 15px;
+    transition: all .1s linear;
+}
+#addTop .store-info{
+    display: none;
+    width: 198px;
+    position: absolute;
+    top: 49px;
+    left: -1px;
+    height: 140px;
+    background-color: #fff;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    border-color: #e5e5e5;
+    box-shadow: rgba(0,0,0,.1) 0 1px 1px 1px;
+}
+#addTop #addCart{
+    display: block;
+    width: 200px;
+    height: 49px;
+    background-color: #FF0036;
+    float: right;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    line-height: 48px;
+}
+/* content-con */
 .content-con{
     width: 1190px;
     min-height: 2000px;
@@ -982,34 +1093,34 @@ header{
     float: left;
 }
 /* store-box */
-.content-con-l .store-box{
+.store-box{
     height: 190px;
     border: 1px solid #e5e5e5;
     background-color: #fff;
 }
-.content-con-l .store-box h3{
+.store-box h3{
     height: 48px;
     border-bottom: 1px solid #e5e5e5;
     line-height: 48px;
     padding-left: 15px;
     background-color: #fafafa;
 }
-.content-con-l .store-box h3 a{
+.store-box h3 a{
     font-size: 12px;
     color: #333;
     font-weight: 700;
 }
-.content-con-l .store-box h3 a:nth-child(2){
+.store-box h3 a:nth-child(2){
     display: inline-block;
     width: 20px;
     height: 20px;
     background: url(../images/shopchat.gif) no-repeat;
     background-position: -82px 0;
 }
-.content-con-l .store-box h3 a:hover{
+.store-box h3 a:hover{
     text-decoration: underline;
 }
-.content-con-l .store-box .store-ages{
+.store-box .store-ages{
     width: 130px;
     margin: 10px auto 5px;
     font-size: 12px;
@@ -1032,7 +1143,6 @@ header{
     display: inline-block;
     font-weight: 700;
 }
-/*  */
 .store-box .shop-info{
     width: 130px;
     height: 51px;
@@ -1184,13 +1294,19 @@ header{
     width: 9px;
     height: 9px;
     text-align: center;
-    line-height: 9px;
+    line-height: 7px;
     font-weight: 700;
     color: #ccc;
     border: 1px solid #a7a6aa;
     border-radius: 50%;
     vertical-align: middle;
     margin-right: 3px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+.skin-box .skin-all>li .s-icon:hover{
+    text-decoration: none;
+    color: #ccc;
 }
 .skin-box .skin-all>li .skin-title{
     display: inline-block;

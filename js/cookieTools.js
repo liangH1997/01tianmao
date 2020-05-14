@@ -52,3 +52,11 @@ function getCookie(key){
     return null;
 }
 
+// 删除（）
+// 功能：删除某个cookie
+// 参数：键
+
+
+function removeCookie(key){
+    saveCookie(key,"byebye",-1);
+}

@@ -7,6 +7,9 @@ header{
     padding: 22px 0;
     background-color: white;
 }
+header h1{
+    width: 190px;
+}
 header h1 img{
     width: 190px;
     margin-top: 10px;

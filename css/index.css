@@ -99,8 +99,8 @@
     margin: 0 auto;
     text-align: center;
     line-height: 50px;
-    background: url(../images/tmalllogo.png)no-repeat left center;
-    background-size: auto 36px;
+    background: url(../images/tmall.png)no-repeat left center;
+    background-size: auto 34px;
     position: relative;
 }
 #hd-search-box #hd-text{

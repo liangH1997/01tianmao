@@ -18,8 +18,8 @@
         <div class="header-wrap">
             <p id="login-fail">
                 <em>喵，欢迎来天猫</em>
-                <a href="#">请登录</a>
-                <a href="#">免费注册</a>
+                <a href="login.html">请登录</a>
+                <a href="reg.html">免费注册</a>
             </p>
             <p id="login-sucess"></p>
             <ul>
@@ -31,7 +31,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="goodscart.html">
                         <i class="iconfont icon-tianchongxing-"></i>
                         购物车
                     </a>
@@ -2122,9 +2122,12 @@
         b1.autoPlay();
         b1.addEvent();
         window.onblur = function () {
-            b1.stopPlay();
+            b1.stopPlay()
         }
-        loginShow()
+        window.onfocus = function(){
+            b1.autoPlay()
+        }
+        loginShow(quit)
         autoSlider()
     }
 
