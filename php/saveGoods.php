@@ -24,15 +24,15 @@
 	
 	//2、数据保存在数据库中
 	//1）、建立连接（搭桥）
-	$conn = mysql_connect("localhost","root","root");
+	$conn = mysqli_connect("localhost","root","root","shoppingcenter");
 	if(!$conn){
-		die("数据库连接失败：".mysql_error());
+		die("数据库连接失败：".mysqli_error());
 	}
 	
 	//2）、选择数据库（找目的地）
-	if(!mysql_select_db("shoppingcenter",$conn)){
-		die("数据库选择失败".mysql_error());
-	};
+	// if(!mysqli_select_db("shoppingcenter",$conn)){
+	// 	die("数据库选择失败".mysql_error());
+	// };
 	
 	//3）、传输数据（过桥）
 	$sqlstr = "insert into goodsInfo values('".$goodsId."','".$goodsName."','".$typeId."'
@@ -42,16 +42,16 @@
 	,'".$beiyong9."','".$beiyong10."','".$beiyong11."','".$beiyong12."','".$beiyong13."')";
 	
 
-	$count = mysql_query($sqlstr,$conn);
+	$count = mysqli_query($conn,$sqlstr);
 	if(!$count){
-		die('插入失败！'.mysql_error());
+		die('插入失败！'.mysqli_error());
 	}
 	//4）、关闭连接（拆桥）
-	mysql_close($conn);
+	mysqli_close($conn);
 	
 	//3、给客户端返回（响应）一个注册成功！
 	if($count>0){
-		 echo "保存成功,<a href='addGoods.html'>继续添加</a>";
+		 echo "保存成功,<a href='../html/addGoods.html'>继续添加</a>";
 	}
 	
 ?>

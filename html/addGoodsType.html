@@ -17,7 +17,7 @@
 <script>
 
 $(function(){
-    $.get('getMaxTypeId.php',function(data){
+    $.get('../php/getMaxTypeId.php',function(data){
         let maxTypeId = "001";
         if(data!=""){
             let str = "00"+(parseInt(data)+1);

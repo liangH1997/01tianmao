@@ -12,6 +12,7 @@ function loginShow(fn) {
     }
     fn && fn()
 }
+// 退出登录（删除cookie）
 function quit() {
     $("#login-quit").click(function () {
         removeCookie("username")
@@ -66,61 +67,65 @@ document.getElementById("textbox").onfocus = function () {
 }
 
 // 商品放大镜效果
-$("#booth-box").mouseover(function () {
-    $("#img-tip").css({ "display": "block" })
-    $("#show-box").css({ "display": "block" })
-})
-$("#booth-box").mouseout(function () {
-    $("#img-tip").css({ "display": "none" })
-    $("#show-box").css({ "display": "none" })
-})
-let oBox = document.getElementById("booth-box")
-let imgTip = document.getElementById("img-tip")
-let showBox = document.getElementById("show-box")
-oBox.onmousemove = function (event) {
-    // 偏移量相关的数据
-    let e = event || window.event
-    let offsetLeft = oBox.offsetLeft
-    let offsetTop = oBox.offsetTop
-    // 数据计算
-    let left = e.pageX - offsetLeft - 109
-    let top = e.pageY - offsetTop - 109
-    // 边界处理
-    // left
-    if (left + 218 > 420) {
-        left = 202
-    } else if (left < 0) {
-        left = 0
+function toBig() {
+    let oBox = document.getElementById("booth-box")
+    let imgTip = document.getElementById("img-tip")
+    let showBox = document.getElementById("show-box")
+    // console.log(showBox)
+    // 切换主图
+    $("#img-list li").mouseover(function () {
+        $("#img-list li").removeClass("img-high-light")
+        $(this).addClass("img-high-light")
+        let src = $(this).find("a").find("img").attr("src")
+        // console.log(src)
+        $("#booth-box").find("img").attr("src", function () {
+            return src
+        })
+        $("#show-box").css("background", function () {
+            return "url(" + src + ")no-repeat"
+        })
+        $("#show-box").css("backgroundSize", function () {
+            return "200% 200%"
+        })
+    })
+    $("#booth-box").mouseover(function () {
+        $("#img-tip").css({ "display": "block" })
+        $("#show-box").css({ "display": "block" })
+    })
+    $("#booth-box").mouseout(function () {
+        $("#img-tip").css({ "display": "none" })
+        $("#show-box").css({ "display": "none" })
+    })
+    oBox.onmousemove = function (event) {
+        // 偏移量相关的数据
+        let e = event || window.event
+        let offsetLeft = oBox.offsetLeft
+        let offsetTop = oBox.offsetTop
+        // 数据计算
+        let left = e.pageX - offsetLeft - 109
+        let top = e.pageY - offsetTop - 109
+        // 边界处理
+        // left
+        if (left + 218 > 420) {
+            left = 202
+        } else if (left < 0) {
+            left = 0
+        }
+        // top
+        if (top + 218 > 420) {
+            top = 202
+        } else if (top < 0) {
+            top = 0
+        }
+        // 外观呈现
+        imgTip.style.top = top + "px"
+        imgTip.style.left = left + "px"
+
+        showBox.style.backgroundPositionX = "-" + left * 2 + "px"
+        showBox.style.backgroundPositionY = "-" + top * 2 + "px"
     }
-    // top
-    if (top + 218 > 420) {
-        top = 202
-    } else if (top < 0) {
-        top = 0
-    }
-    // 外观呈现
-    imgTip.style.top = top+"px"
-    imgTip.style.left = left+"px"            
-    
-    showBox.style.backgroundPositionX = "-"+left*2+"px"
-    showBox.style.backgroundPositionY = "-"+top*2+"px"
 }
-// 切换主图
-$("#img-list li").mouseover(function(){
-    $("#img-list li").removeClass("img-high-light")
-    $(this).addClass("img-high-light")
-    let src = $(this).find("a").find("img").attr("src")
-    // console.log(src)
-    $("#booth-box").find("img").attr("src",function(){
-        return src
-    })
-    $("#show-box").css("background",function(){
-        return "url("+src+")no-repeat"
-    })
-    $("#show-box").css("backgroundSize",function(){
-        return "200% 200%"
-    })
-})
+
 
 // 吸顶效果
 let f = false
@@ -130,52 +135,117 @@ $(window).scroll(function () {
     // console.log(scrollY)
     let addTop = $("#addTop")
     let tabBar = $("#tab-bar")
-    if(scrollY>900){
-        if(f == false){
-           window.scrollTo(0,1060) 
-           f = true
+    if (scrollY > 900) {
+        if (f == false) {
+            window.scrollTo(0, 1060)
+            f = true
         }
-        addTop.css("display","block")
+        addTop.css("display", "block")
         tabBar.css({
-                "position":"fixed",
-                "top":"0",
-                "left":"50%",
-                "zIndex":"102",
-                "width":"790px",
-                "border":"none",
-                "transform":"translateX(-50%)"
-            })
-    }else{
-        addTop.css("display","none")
+            "position": "fixed",
+            "top": "0",
+            "left": "50%",
+            "zIndex": "102",
+            "width": "790px",
+            "border": "none",
+            "transform": "translateX(-50%)"
+        })
+    } else {
+        addTop.css("display", "none")
         tabBar.css({
-            "position":"relative",
-            "left":"0",
-            "transform":"translateX(0)",
-            "border":"1px solid #e5e5e5"
+            "position": "relative",
+            "left": "0",
+            "transform": "translateX(0)",
+            "border": "1px solid #e5e5e5"
         })
         f = false
     }
 })
 
 // 收起二级菜单
-
-function goLong(){
+function goLong() {
     let goBtn = $(".skin-all .s-icon")
     let r = false
-    goBtn.click(function(){
-        if(r == false){
+    goBtn.click(function () {
+        if (r == false) {
             $(this).html("+")
-            $(this).parent().siblings().css("display","none")
+            $(this).parent().siblings().css("display", "none")
             r = true
-        }else{
+        } else {
             $(this).html("-")
-            $(this).parent().siblings().css("display","block")
+            $(this).parent().siblings().css("display", "block")
             r = false
         }
     })
 }
-$(function(){
+
+// 向后端发送请求，接收服务器商品信息
+function showInfo(toBig) {
+    let goodsId = location.search.substring(1)
+    // console.log(goodsId)
+    if (goodsId != "") {
+        $.get("../php/getGoodsInfo.php", { "goodsId": goodsId }, function (data) {
+            $(".shopname").html(data.beiyong5)
+            // console.log(data)
+            $("#img-list").html(function () {
+                return `
+            <li class="img-high-light">
+            <a>
+                <img src="${data.goodsImg}" alt="">
+            </a>
+            </li>
+            <li class="">
+                <a>
+                    <img src="${data.beiyong1}" alt="">
+                </a>
+            </li>
+            <li class="">
+                <a>
+                    <img src="${data.beiyong2}" alt="">
+                </a>
+            </li>
+            <li class="">
+                <a>
+                    <img src="${data.beiyong3}" alt="">
+                </a>
+            </li>
+            <li class="">
+                <a>
+                    <img src="${data.beiyong4}" alt="">
+                </a>
+            </li>
+            `
+            })
+            $("#booth-box img").attr("src", function () {
+                return `${data.goodsImg}`
+            })
+            $("#goods-name").html(function(){
+                return `${data.goodsName}`
+            })
+            $("#before-price").html(function(){
+                return `${data.beiyong8}`
+            })
+            $("#now-price").html(function(){
+                return `${data.goodsPrice}`
+            })
+            $("#sale-num").html(function(){
+                return `${data.beiyong6}`
+            })
+            $(".user-word").html(function(){
+                return `${data.beiyong7}`
+            })
+            // 解决异步问题
+            toBig && toBig()
+        }, "json")
+    }else{
+        toBig && toBig()
+    }
+}
+
+$(function () {
     goLong()
+    showInfo(toBig)
 })
+
 
 

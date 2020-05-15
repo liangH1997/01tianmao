@@ -1,4 +1,7 @@
 @charset "utf-8";
+a{
+    cursor: pointer;
+}
 /* header */
 header{
     height: 26px;
@@ -9,13 +12,19 @@ header .header-wrap{
 .header-wrap p{
     line-height: 26px;
 }
-.header-wrap p a:first-child{
+.header-wrap #login-fail a:first-child{
     background: url(../images/51-home.png) no-repeat center left;
     background-size: 15px 12px;
     padding-left: 20px;
 }
 .header-wrap p em{
     padding-left: 22px;
+}
+#login-sucess a:hover{
+    text-decoration: underline;
+}
+#login-sucess .username{
+    padding: 0;
 }
 .header-wrap>ul>li{
     height: 26px;
@@ -108,22 +117,46 @@ header .header-wrap{
     color: #fff;
     background-color: #FF0036;
 }
-.search-c ul{
+/* 搜索索引 */
+#name-list{
+    width: 507px;
+    position: absolute;
+    left: 0;
+    top: 36px;
+    background-color: #fff;
+    z-index: 101;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 0 5px #aaa;
+    display: none;
+}
+#name-list li{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #666;
+    padding-left: 5px;
+    border-bottom: 1px solid #e5e5e5;
+}
+#name-list li:hover{
+    background-color: #ff0036;
+    color: #fff;
+}
+.search-c .like-name{
     padding-top: 6px;
     height: 14px;
 }
-.search-c ul li{
+.search-c .like-name li{
     padding: 0 12px;
     border-left: 1px solid #999;
     float: left;
     height: 14px;
     line-height: 12px;
 }
-.search-c ul li:first-child{
+.search-c .like-name li:first-child{
     padding-left: 0;
     border-left: none;
 }
-.search-c ul li a{
+.search-c .like-name li a{
     display: inline-block;
     line-height: 12px;
     height: 12px;
@@ -131,7 +164,7 @@ header .header-wrap{
     color: #999;
     font-weight: 300;
 }
-.search-c ul li a:hover{
+.search-c .like-name li a:hover{
     color: #FF0036;
 }
 .search-r{
@@ -371,6 +404,7 @@ header .header-wrap{
     font-size: 20px;
     color: #ff0036;
 }
+
 .content-list #goodList .productPrice em b{
     margin-right: 2px;
     font-weight: 700;
@@ -642,7 +676,7 @@ header .header-wrap{
 }
 .content-hotsale .productPrice s{
     color: #999;
-    font-size: 14px;
+    font-size: 12px;
 }
 .content-hotsale .productPrice span {
     float: right;

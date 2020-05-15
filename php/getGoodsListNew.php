@@ -1,26 +1,22 @@
 <?php
 	header("Content-Type:text/html;charset=utf-8");
-	$typeId = "";
-	if(is_array($_GET)&&count($_GET)>0)//先判断是否通过get传值了
-    {
-        if(isset($_GET["typeId"]))//是否存在"id"的参数
-        {
-            $typeId=$_GET["typeId"];//存在
-        }
-    }
+
+    $typeId=$_GET["typeId"];
+    $count=$_GET["count"];
+        
 	// echo "typeId".$typeId;
 	//2、数据保存在数据库中
 	//1）、建立连接（搭桥）
 	$conn = mysqli_connect("localhost","root","root","shoppingcenter");
 	
 	//2）、选择数据库（找目的地）
-	// if(!mysql_select_db("shoppingcenter",$conn)){
+	// if(!mysql_select_db("pingduoduo",$conn)){
 	// 	die("数据库选择失败".mysql_error());
 	// }
 	
 	//3）、传输数据（过桥）
 	$sqlstr = "select gi.*,gt.goodstype
-				 from goodsInfo as gi,goodstype as gt
+				 from goodsinfo as gi,goodstype as gt
 			    where 1=1
 				  and gt.typeId = gi.typeId ";
 				  
@@ -28,6 +24,7 @@
 		$sqlstr .= " and gi.typeId='$typeId'";
 	}	
 	$sqlstr .= " order by gi.goodsId";
+	$sqlstr .= " limit ".$count;
 
 	$result = mysqli_query($conn,$sqlstr);//执行查询的sql语句后，有返回值，返回的是查询结果
 	if(!$result){

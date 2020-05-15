@@ -27,7 +27,7 @@
 	
 	//3、给客户端返回（响应）一个注册成功！
 	if($count>0){
-	    echo "保存成功,<a href='addGoodsType.html'>继续添加</a>";
+	    echo "保存成功,<a href='../html/addGoodsType.html'>继续添加</a>";
 	}
 	
 ?>

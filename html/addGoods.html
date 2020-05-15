@@ -35,7 +35,7 @@
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script>
 $(function(){
-	$.get("getGoodsType.php",function(data){
+	$.get("../php/getGoodsType.php",function(data){
 		let objs = JSON.parse(data);
 		let htmlStr="";
 		objs.forEach(function(item){
