@@ -71,6 +71,7 @@ function toBig() {
     let oBox = document.getElementById("booth-box")
     let imgTip = document.getElementById("img-tip")
     let showBox = document.getElementById("show-box")
+
     // console.log(showBox)
     // 切换主图
     $("#img-list li").mouseover(function () {
@@ -81,16 +82,17 @@ function toBig() {
         $("#booth-box").find("img").attr("src", function () {
             return src
         })
-        $("#show-box").css("background", function () {
-            return "url(" + src + ")no-repeat"
-        })
-        $("#show-box").css("backgroundSize", function () {
-            return "200% 200%"
-        })
     })
     $("#booth-box").mouseover(function () {
         $("#img-tip").css({ "display": "block" })
         $("#show-box").css({ "display": "block" })
+        let src = $(this).find("img").attr("src")
+        $("#show-box").css("background", function () {
+            return "#fff url(" + src + ")no-repeat"
+        })
+        $("#show-box").css("backgroundSize", function () {
+            return "200% 200%"
+        })
     })
     $("#booth-box").mouseout(function () {
         $("#img-tip").css({ "display": "none" })
@@ -183,10 +185,13 @@ function goLong() {
 function showInfo(toBig) {
     let goodsId = location.search.substring(1)
     // console.log(goodsId)
+    // 判断是否有goodsId
     if (goodsId != "") {
         $.get("../php/getGoodsInfo.php", { "goodsId": goodsId }, function (data) {
+            // 店铺名称
             $(".shopname").html(data.beiyong5)
             // console.log(data)
+            // img-list
             $("#img-list").html(function () {
                 return `
             <li class="img-high-light">
@@ -216,35 +221,103 @@ function showInfo(toBig) {
             </li>
             `
             })
+            // 主图
             $("#booth-box img").attr("src", function () {
                 return `${data.goodsImg}`
             })
-            $("#goods-name").html(function(){
+            // 商品名称
+            $("#goods-name").html(function () {
                 return `${data.goodsName}`
             })
-            $("#before-price").html(function(){
+            // 原价
+            $("#before-price").html(function () {
                 return `${data.beiyong8}`
             })
-            $("#now-price").html(function(){
+            // 促销价
+            $("#now-price").html(function () {
                 return `${data.goodsPrice}`
             })
-            $("#sale-num").html(function(){
+            // 销售量
+            $("#sale-num").html(function () {
                 return `${data.beiyong6}`
             })
-            $(".user-word").html(function(){
+            // 累计评论
+            $(".user-word").html(function () {
                 return `${data.beiyong7}`
             })
+            $("#goods-num").val(data.goodsCount)
             // 解决异步问题
+            // 放大镜
             toBig && toBig()
         }, "json")
-    }else{
+    } else {
         toBig && toBig()
     }
 }
 
+// 修改商品数量
+function goodcount() {
+    $("#addNum").click(function () {
+        let count = parseInt($("#goods-num").val())
+        count++
+        // console.log(count);
+        $("#goods-num").val(count)
+        // console.log(count);
+    })
+    $("#redNum").click(function () {
+        let count = parseInt($("#goods-num").val())
+        count--
+        if (count < 1) {
+            count = 1
+            return
+        }
+        // console.log(count);
+        $("#goods-num").val(count)
+    })
+}
+
+// 加入购物车
+function addgoods() {
+    let username = getCookie("username")
+    // console.log(username)
+    let goodId = location.search.substring(1)
+    // console.log(goodId);
+
+    $("#addCart").click(function () {
+        if (username != null) {
+            let count = $("#goods-num").val()
+            console.log(username)
+            $.post(
+                "../php/addShoppingCart.php",
+                {
+                    "vipName": username,
+                    "goodsId": goodId,
+                    "goodsCount": count
+                },
+                function (data) {
+                    if (data == "1") {
+                        // console.log(data);
+                        alert("恭喜您，添加成功！")
+                    } else {
+                        // console.log(data);
+
+                        alert("不好意思，添加失败！")
+                    }
+                }
+            )
+        } else {
+            alert("亲，请先登录！")
+        }
+    })
+}
+
+
 $(function () {
+    loginShow(quit)
     goLong()
     showInfo(toBig)
+    goodcount()
+    addgoods()
 })
 
 

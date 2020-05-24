@@ -24,7 +24,7 @@ function showData(data) {
             <li>
                 <dl>
                     <dt>
-                        <a href="../html/pro-details.html?${item.goodsId}">
+                        <a href="../html/pro-details.html?${item.goodsId}" target="_blank">
                             <img src="${item.goodsImg}" alt="">
                         </a>
                     </dt>

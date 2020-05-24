@@ -8,17 +8,17 @@
 	
 	//2、数据保存在数据库中
 	//1）、建立连接（搭桥）
-	$conn = mysql_connect("localhost","root","root");
+	$conn = mysqli_connect("localhost","root","root","shoppingcenter");
 	
 	//2）、选择数据库（找目的地）
-	if(!mysql_select_db("shoppingcenter",$conn)){
-		die("数据库选择失败".mysql_error());
-	};
+	// if(!mysqli_select_db($conn)){
+	// 	die("数据库选择失败".mysqli_error());
+	// };
 	
 	//3）、传输数据（过桥）
-	$result = mysql_query("select * from shoppingCart where vipName='".$vipName."' and goodsId='".$goodsId."'",$conn);
+	$result = mysqli_query($conn,"select * from shoppingcart where vipName='".$vipName."' and goodsId='".$goodsId."'");
 	//3.1)先查找该商品是否在购物车中存在
-	if(mysql_num_rows($result)>0){
+	if(mysqli_num_rows($result)>0){
 		//如果存在，则使用update语句
 		$sqlstr = "update shoppingCart set goodsCount=goodsCount+".$goodsCount." where vipName='".$vipName."' and goodsId='".$goodsId."'";
 	}else{
@@ -26,13 +26,13 @@
 		$sqlstr = "insert into shoppingCart values('".$vipName."','".$goodsId."','".$goodsCount."')";		
 	}
 	
-	$result=mysql_query($sqlstr,$conn);	
+	$result=mysqli_query($conn,$sqlstr);	
 	//4）、关闭连接（拆桥）
-	mysql_close($conn);
+	mysqli_close($conn);
 	
-	if(!$result){
-		die("添加失败".mysql_error());
-	}	
+	// if(!$result){
+	// 	die("添加失败".mysqli_error($conn));
+	// }	
 	
 	//3、给客户端返回（响应） 1：表示添加成功 0：表示添加失败
 	if($result>0){

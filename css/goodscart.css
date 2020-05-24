@@ -1,4 +1,7 @@
 @charset "utf-8";
+a{
+    cursor: pointer;
+}
 /* header */
 header .header-wrap{
     width: 1190px;
@@ -82,7 +85,7 @@ header .header-wrap{
     width: 1190px;
     margin: 0 auto;
     min-height: 500px;
-    padding-bottom: 20px;
+    padding-bottom: 36px;
     margin-top: 10px;
 }
 /* cart-nav */
@@ -322,10 +325,10 @@ header .header-wrap{
     background-color: #f0f0f0;
     line-height: 23px;
 }
-.gdbox-list .gdbox-count .count-add{
+.gdbox-list .gdbox-count a{
     color: #444;
 }
-.gdbox-list .gdbox-count .count-add:hover{
+.gdbox-list .gdbox-count a:hover{
     color: #FF0036;
     text-decoration: none;
     border-color: #FF0036;
