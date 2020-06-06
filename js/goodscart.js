@@ -73,7 +73,7 @@ function getShoppingCar(cb) {
                         </li>
                         <li class="gdbox-action">
                             <a href="#">移入收藏夹</a>
-                            <a id="removePro">删除</a>
+                            <a class="removePro">删除</a>
                             <a href="#" class="like-goods">相似宝贝 ></a>
                         </li>
                     </ul>
@@ -89,17 +89,19 @@ function getShoppingCar(cb) {
 // 添加点击事件
 function addEvent(){
     $(".cart-main :checkbox:eq(0)").check($(".cart :checkbox:gt(0)"));
-    $(".cart-gdbox :checkbox:eq(0)").check($(".gdbox-con :checkbox"));
+    $(".cart :checkbox:last").check($(".cart :checkbox").not($(":checkbox:last")));
+    $(".cart-gdbox :checkbox:eq(0)").check($(this).find(":checkbox"));
     $(":checkbox").click(function(){
         totalMoney();
     });
+    // 加号
     $(".addBtn").click(function(){
         //一、修改后端的数量
         let goodsId = $(this).parent().siblings().eq(0).find("input").prop("name");
-        console.log(goodsId);
+        // console.log(goodsId);
         let count = parseFloat($(this).prev().val());
         count++;
-        console.log(count);
+        // console.log(count);
         updateCount(goodsId,count,()=>{            
             //二、修改前端的数量
             // 数量            
@@ -114,6 +116,7 @@ function addEvent(){
             totalMoney();  
         });
     });    
+    // 减号
     $(".reduceBtn").click(function(){
         //一、修改后端的数量
         let goodsId = $(this).parent().siblings().eq(0).find("input").prop("name");
@@ -138,12 +141,35 @@ function addEvent(){
             totalMoney();
         })
     });
-    $(".delBtn").click(function(){
+    // 删除
+    $(".removePro").click(function(){
+        let username = getCookie("username")
+        let goodsId = $(this).parent().siblings().eq(0).find("input").prop("name");
         if(confirm("亲，您真的要删除吗？")){
-            $(this).parent().parent().remove();
-            totalMoney();
+            var index = $(this).parent().parent().parent().parent().find(".gdbox-con")
+            console.log(index);
+            if(index.length == 1){
+                $(this).parent().parent().parent().parent().remove();
+                totalMoney();
+            }else{
+                $(this).parent().parent().parent().remove();
+                totalMoney();
+            }
+            $.get(
+                "../php/deleteGoods.php",
+                {
+                    vipName:username,
+                    goodsId:goodsId},
+                    function(data){
+                        if(data == 1){
+                            alert("删除成功")
+                        }else if(data == 0){
+                            alert("服务器出错啦！")
+                        }
+            })
         }
-    });
+            
+    })
 }
 
 // 计算金额
@@ -155,9 +181,15 @@ function totalMoney(){
         // 复选框是不是选中了
         if($(this).find(".gdbox-hd").find(":checkbox").prop("checked")){
             money += parseFloat($(this).find(".gdbox-money").find("em").html());
+            // console.log(money);
         }
     });
-    $("#float-box").find(".price-sum").find("span").html("<em>￥</em>"+money);    
+    if(money>0){
+        $(".jsBtn").css("background","#ff0036")
+    }else{
+        $(".jsBtn").css("background","#b0b0b0")
+    }
+    $("#float-box").find(".price-sum").find("span").html("<em>￥</em>"+money);  
     $(".cart-sum").find("em").html("￥"+money);  
 }
 
